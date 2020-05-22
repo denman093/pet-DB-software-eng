@@ -114,6 +114,27 @@ public class PetDatabase {
         else
             System.out.println("Unable to remove pet.");
     }
+    
+    public boolean save(String filename) {
+	try {
+		FileOutputStream file = new FileOutputStream(filename); 
+		ObjectOutputStream out = new ObjectOutputStream(file);
+			
+		out.writeObject(pets);
+		out.close(); 
+		file.close();
+			
+		System.out.println("Database has been saved.");
+		return true;
+			
+	} catch (FileNotFoundException e) {
+		System.out.println("File not found");
+		return false;
+	} catch (IOException e) {
+		System.out.println("Error with input/output");
+		return false;
+	}
+    }
    
     public static void header() {
     	System.out.println("+----------------------+");
