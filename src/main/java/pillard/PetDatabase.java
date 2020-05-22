@@ -17,21 +17,29 @@ public class PetDatabase {
         String name = "";
         int age, count = 0;
         
-        System.out.println("Enter \"done\" to stop.");
+        if(pets.size() >= 5) 
+            System.out.println("ERROR: Database is full.");
+        else {
+            System.out.println("Enter \"done\" to stop.");
 
-        while(!name.equals("done")) {
-            System.out.print("Add pet (name, age): ");
+            while(!name.equals("done") && pets.size() < 5) {
+                System.out.print("Add pet (name, age): ");
 
-            name = input.next();
-            if(name.matches("done")) break;
+                name = input.next();
+                if(name.matches("done")) break;
 
-            age = input.nextInt();
-
-            pets.add(new Pet(name, age));
-            count++;
-        }
+                age = input.nextInt();
+                
+                if(age < 1 || age > 20)
+                    System.out.println("ERROR: Age must be between 1 and 20");
+                else {
+                    pets.add(new Pet(name, age));
+                    count++;
+                }
+            }
         System.out.println(count + " pets added.");
         input.nextLine();
+        }
     }
 
     public void displayAll() {
