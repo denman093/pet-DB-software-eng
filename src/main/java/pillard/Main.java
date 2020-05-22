@@ -19,6 +19,8 @@ public class Main {
         int choice = 0;
         Scanner input = new Scanner(System.in);
         final String filename = "petDB.txt";
+        
+        petDB.load(filename);
 
         while(choice != 4) {
             displayMenu();    
