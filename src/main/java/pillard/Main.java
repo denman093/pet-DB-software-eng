@@ -29,7 +29,7 @@ public class Main {
                 case 1: petDB.displayAll(); break;
                 case 2: petDB.addPets(); break;
                 case 3: petDB.removePet(); break;
-                case 4: break;
+                case 4: petDB.save(filename); break;
                 default: System.out.println("Invalid Selection");
             }
         }
