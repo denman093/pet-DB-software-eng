@@ -135,6 +135,32 @@ public class PetDatabase {
 		return false;
 	}
     }
+    
+    public ArrayList<Pet> load(String filename) {
+        try { 
+            FileInputStream file = new FileInputStream(filename); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+			
+            pets = (ArrayList) in.readObject(); 
+			  
+            in.close(); 
+            file.close(); 
+			
+            System.out.println("Database has been loaded.");
+	} 
+	catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            System.exit(1);
+	} 
+	catch (ClassNotFoundException e) {
+            System.out.println("Class not found");
+	} 
+	catch (IOException e) {
+            System.out.println("Error with input/output");
+	} 
+		 
+	return pets;
+    }
    
     public static void header() {
     	System.out.println("+----------------------+");
