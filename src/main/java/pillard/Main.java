@@ -3,6 +3,26 @@ package pillard;
 import java.util.*;
 
 public class Main {
+    
+    public static int isValidNumber() {
+        boolean valid = false;
+        Scanner input;
+        int number = 0;
+        
+        do {
+            try {
+                input = new Scanner(System.in);
+                number = input.nextInt();
+                valid = true;
+            }
+            catch(InputMismatchException e) {
+                System.out.println("\nInput must be an integer.");
+                System.out.print("Enter again: ");
+            }
+        } while(!valid);
+        
+        return number;
+    }
 
     public static void displayMenu() {
         System.out.println();
@@ -16,15 +36,16 @@ public class Main {
 
     public static void main(String[] args) {
         PetDatabase petDB = new PetDatabase();
-        int choice = 0;
-        Scanner input = new Scanner(System.in);
         final String filename = "petDB.txt";
+        int choice = 0;
         
         petDB.load(filename);
-
+        
         while(choice != 4) {
-            displayMenu();    
-            choice = input.nextInt();
+            displayMenu();
+         
+            choice = isValidNumber();
+            
             System.out.println();
 
             switch(choice) {
@@ -35,6 +56,5 @@ public class Main {
                 default: System.out.println("Invalid Selection");
             }
         }
-        input.close();
     }
 }

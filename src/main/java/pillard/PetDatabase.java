@@ -15,7 +15,8 @@ public class PetDatabase {
 
     public void addPets() {
         String name = "";
-        int age, count = 0;
+        int age;
+        int count = 0;
         
         if(pets.size() >= 5) 
             System.out.println("ERROR: Database is full.");
@@ -24,14 +25,20 @@ public class PetDatabase {
 
             while(!name.equals("done") && pets.size() < 5) {
                 System.out.print("Add pet (name, age): ");
-
+                    
                 name = input.next();
                 if(name.matches("done")) break;
 
-                age = input.nextInt();
+                try {
+                    age = input.nextInt();
+                }
+                catch(InputMismatchException e) {
+                    System.out.println("\nUnable to add pet, age wasn't an integer");
+                    break;
+                }
                 
                 if(age < 1 || age > 20)
-                    System.out.println("ERROR: Age must be between 1 and 20");
+                    System.out.println("\nERROR: Age must be between 1 and 20");
                 else {
                     pets.add(new Pet(name, age));
                     count++;
@@ -108,6 +115,7 @@ public class PetDatabase {
 
     public void removePet() {
         displayAll();
+        int petID;
 
         if(pets.isEmpty()) {
             System.out.println("No pets to remove.");
@@ -115,12 +123,12 @@ public class PetDatabase {
         }
 
         System.out.print("Enter the pet ID to remove: ");
-        int petID = input.nextInt();
+        petID = Main.isValidNumber();
 
         if(petID >= 0 && petID < pets.size()) 
             pets.remove(petID);
         else
-            System.out.println("Unable to remove pet.");
+            System.out.println("ID not found.");
     }
     
     public boolean save(String filename) {
